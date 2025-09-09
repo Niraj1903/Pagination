@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { TiChevronRightOutline } from "react-icons/ti";
+import { TiChevronLeftOutline } from "react-icons/ti";
 import ProductCard from "./ProductCard";
 
 const Pagination = () => {
@@ -9,6 +11,17 @@ const Pagination = () => {
   const noOfPages = Math.ceil(TotalProducts / PAGE_SIZE);
   const start = currentPage * PAGE_SIZE;
   const end = start + PAGE_SIZE;
+  const handlePageChange = (n) => {
+    setCurrentPage(n);
+  };
+
+  const goToPreviousPage = () => {
+    setCurrentPage((prev) => prev - 1);
+  };
+
+  const goToNextPage = () => {
+    setCurrentPage((prev) => prev + 1);
+  };
   const fetchData = async () => {
     const paginationData = await fetch(
       "https://dummyjson.com/products?limit=500"
@@ -38,14 +51,29 @@ const Pagination = () => {
         ))}
       </div>
       <div className="p-5 flex justify-center">
+        <button
+          disabled={currentPage === 0}
+          className="border border-black cursor-pointer text-3xl text-gray-700 hover:text-black pt-[6px]"
+          onClick={() => goToPreviousPage()}
+        >
+          <TiChevronLeftOutline />
+        </button>
         {[...Array(noOfPages).keys()].map((item) => (
-          <span
-            className="border border-black py-2 px-3 mx-2 text-gray-600 font-bold"
+          <button
+            onClick={() => handlePageChange(item)}
+            className="cursor-pointer border border-black py-2 px-3 mx-2 text-gray-600 font-bold"
             key={item}
           >
             {item + 1}
-          </span>
+          </button>
         ))}
+        <button
+          disabled={currentPage === noOfPages - 1}
+          className="border border-black cursor-pointer text-3xl text-gray-700 hover:text-black pt-[6px]"
+          onClick={() => goToNextPage()}
+        >
+          <TiChevronRightOutline />
+        </button>
       </div>
     </>
   );
