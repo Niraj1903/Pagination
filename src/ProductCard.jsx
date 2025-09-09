@@ -3,7 +3,7 @@ const ProductCard = ({ title, image }) => {
     <>
       <div className="border border-black w-[200px] m-2 p-2 flex flex-wrap">
         <img src={image} alt="" />
-        <p>{title}</p>
+        <p className="m-auto">{title}</p>
       </div>
     </>
   );
