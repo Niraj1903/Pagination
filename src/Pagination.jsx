@@ -3,11 +3,12 @@ import ProductCard from "./ProductCard";
 
 const Pagination = () => {
   const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
   const PAGE_SIZE = 10;
   const TotalProducts = products.length;
   const noOfPages = Math.ceil(TotalProducts / PAGE_SIZE);
-  console.log([...Array(noOfPages).keys()]);
-
+  const start = currentPage * PAGE_SIZE;
+  const end = start + PAGE_SIZE;
   const fetchData = async () => {
     const paginationData = await fetch(
       "https://dummyjson.com/products?limit=500"
@@ -25,7 +26,7 @@ const Pagination = () => {
       <h1>Pagination</h1>
 
       <div className="flex flex-wrap">
-        {products.map((item) => (
+        {products.slice(start, end).map((item) => (
           <ProductCard
             className="flex flex-wrap"
             key={item.id}
