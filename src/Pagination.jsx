@@ -23,7 +23,9 @@ const Pagination = () => {
 
   return (
     <>
-      <h1>Pagination</h1>
+      <h1 className="flex justify-center font-bold my-3 text-green-700">
+        PAGINATION
+      </h1>
 
       <div className="flex flex-wrap">
         {products.slice(start, end).map((item) => (
