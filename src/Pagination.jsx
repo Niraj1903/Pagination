@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 
 const Pagination = () => {
   const fetchData = async () => {
-    const paginationData = await fetch("https://dummyjson.com/products");
+    const paginationData = await fetch(
+      "https://dummyjson.com/products?limit=500"
+    );
     const data = await paginationData.json();
     console.log(data);
   };
