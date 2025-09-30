@@ -61,7 +61,10 @@ const Pagination = () => {
         {[...Array(noOfPages).keys()].map((item) => (
           <button
             onClick={() => handlePageChange(item)}
-            className="cursor-pointer border border-black py-2 px-3 mx-2 text-gray-600 font-bold"
+            className={
+              "cursor-pointer border border-black py-2 px-3 mx-2 text-gray-600 font-bold" +
+              (item === currentPage ? " bg-amber-600" : "")
+            }
             key={item}
           >
             {item + 1}
